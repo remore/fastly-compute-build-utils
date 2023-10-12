@@ -1,5 +1,5 @@
 
-## How to use
+## Usage
 ```bash
 docker build -t fastly-compute-rust . && docker run -it -v ./:/app fastly-compute-rust /bin/bash
 root@a3c6d940901d:/app# git clone https://github.com/fastly/compute-starter-kit-rust-default.git src

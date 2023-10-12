@@ -1,4 +1,4 @@
-## How to use
+## Usage
 ```bash
 docker build -t fastly-compute-go . && docker run -it -v ./:/app fastly-compute-go /bin/bash
 root@a3c6d940901d:/app# git clone https://github.com/fastly/compute-starter-kit-go-default.git src
