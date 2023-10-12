@@ -23,7 +23,7 @@ A fastly account is the only prerequisite. Please make sure you have a [valid AP
 
 1. Visit [fiddle](https://fiddle.fastly.dev/) and write your code at to build a WASM binary
 2. Once it's succesfully built, grab your FIDDLE_ID from the fiddle url (e.g. use `3a6c16f5` if the url is https://fiddle.fastly.dev/fiddle/3a6c16f5) and run the following command (Make sure you replace FIDDLE_ID with your own one!) [1]
-```
+```bash
 (export FIDDLE_ID=3a6c16f5; export PACKAGE_NAME=$FIDDLE_ID-v$(curl -s https://fiddle.fastly.dev/fiddle/$FIDDLE_ID -H 'Accept:application/json;' | jq .fiddle.srcVersion); export FIDDLE_TMP_DIR=$(mktemp -d); export PACKAGE_TMP_DIR=$(mktemp -d); curl -sLO "https://storage.googleapis.com/fiddle-compute-cache/fiddles/$FIDDLE_ID/$PACKAGE_NAME.tar"; tar -xzf $PACKAGE_NAME.tar -C $FIDDLE_TMP_DIR; mv $PACKAGE_NAME.tar $PACKAGE_TMP_DIR; cd $FIDDLE_TMP_DIR; mkdir bin; mv main.wasm ./bin; tar -zcvf $PACKAGE_TMP_DIR/package-$PACKAGE_NAME.tar.gz ./ > /dev/null 2>&1; mv $PACKAGE_TMP_DIR/package-$PACKAGE_NAME.tar.gz ./; echo "Your package file is ready at:\n  $FIDDLE_TMP_DIR";)
 ```
 
