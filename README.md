@@ -45,7 +45,7 @@ drwxr-xr-x    3 kaysawada  staff       96 Oct 12 15:32 bin
 In this example, `package-3a6c16f5-v59.tar.gz` can be uploaded via either Fastly App (Admin console of Web UI) or Fastly CLI (using `$fastly compute deploy` command).
 
 [1] If you don't have `jq` command available on your system, you can always manually generate PACKAGE_NAME env variable by the command below and use it in the aforementioned command(Make sure you use your own fiddle url for curl command);
-```
+```bash
 (export FIDDLE_ID=3a6c16f5; echo $FIDDLE_ID-v$(curl -s https://fiddle.fastly.dev/fiddle/$FIDDLE_ID -H 'Accept:application/json;' | awk '{print substr($0, index($0, "srcVersion"))}' | awk '{sub(",.*", "");print substr($0, index($0, ":"));}' | cut -c 2-))
 ```
 
