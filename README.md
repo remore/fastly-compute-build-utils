@@ -9,7 +9,7 @@ Supplemental materials for setting up build environment for Fastly Compute. Plea
 
 All you need to have to proceed with this path is a [valid API token](https://developer.fastly.com/reference/api/auth-tokens/user/) associated with your Fastly account, and a docker environment installed onto your system.
 
-Please go visit one of folders with language of your choice and follow the instruction there.
+Please go visit one of folders with language of your choice and follow the instruction there to start building your package.
 
 - [Rust](./Rust/)
 - [Go](./Go/)
@@ -27,7 +27,22 @@ A fastly account is the only prerequisite. Please make sure you have a [valid AP
 (export FIDDLE_ID=3a6c16f5; export PACKAGE_NAME=$FIDDLE_ID-v$(curl -s https://fiddle.fastly.dev/fiddle/$FIDDLE_ID -H 'Accept:application/json;' | jq .fiddle.srcVersion); export FIDDLE_TMP_DIR=$(mktemp -d); export PACKAGE_TMP_DIR=$(mktemp -d); curl -sLO "https://storage.googleapis.com/fiddle-compute-cache/fiddles/$FIDDLE_ID/$PACKAGE_NAME.tar"; tar -xzf $PACKAGE_NAME.tar -C $FIDDLE_TMP_DIR; mv $PACKAGE_NAME.tar $PACKAGE_TMP_DIR; cd $FIDDLE_TMP_DIR; mkdir bin; mv main.wasm ./bin; tar -zcvf $PACKAGE_TMP_DIR/package-$PACKAGE_NAME.tar.gz ./ > /dev/null 2>&1; mv $PACKAGE_TMP_DIR/package-$PACKAGE_NAME.tar.gz ./; echo "Your package file is ready at:\n  $FIDDLE_TMP_DIR";)
 ```
 
-1. If the command was successful you will get a temporary folder path like `/var/folders/5h/v8pfwm2136l9_q3m7pbzkq_w0000gp/T/tmp.Tz2JOYq7`, where you can pick a package file named like `package-3a6c16f5-v59.tar.gz`. This tar.gz file can be uploaded via either Fastly App (Admin console of Web UI) or Fastly CLI (using `$fastly compute deploy` command).
+3. If the command above was successful you will get a temporary folder path, where you can pick a package file named like `package-3a6c16f5-v59.tar.gz`. Below is an example output of this;
+
+```bash
+$ (export FIDDLE_ID=3a6c16f5; export PACKAGE_NAME=$FIDDLE_ID-v$(curl -s https://fiddle.fastly.dev/fiddle/$FIDDLE_ID -H 'Accept:application/json;' | jq .fiddle.srcVersion); export FIDDLE_TMP_DIR=$(mktemp -d); export PACKAGE_TMP_DIR=$(mktemp -d); curl -sLO "https://storage.googleapis.com/fiddle-compute-cache/fiddles/$FIDDLE_ID/$PACKAGE_NAME.tar"; tar -xzf $PACKAGE_NAME.tar -C $FIDDLE_TMP_DIR; mv $PACKAGE_NAME.tar $PACKAGE_TMP_DIR; cd $FIDDLE_TMP_DIR; mkdir bin; mv main.wasm ./bin; tar -zcvf $PACKAGE_TMP_DIR/package-$PACKAGE_NAME.tar.gz ./ > /dev/null 2>&1; mv $PACKAGE_TMP_DIR/package-$PACKAGE_NAME.tar.gz ./; echo "Your package file is ready at:\n  $FIDDLE_TMP_DIR";)
+Your package file is ready at:
+  /var/folders/5h/v8pfwm2136l9_q3m7pbzkq_w0000gp/T/tmp.VleR9APR
+$ ls -al /var/folders/5h/v8pfwm2136l9_q3m7pbzkq_w0000gp/T/tmp.VleR9APR
+total 2128
+drwx------    5 kaysawada  staff      160 Oct 12 15:32 .
+drwx------@ 360 kaysawada  staff    11520 Oct 12 15:32 ..
+drwxr-xr-x    3 kaysawada  staff       96 Oct 12 15:32 bin
+-rwxr-xr-x    1 kaysawada  staff      364 Jan  1  1970 fastly.toml
+-rw-r--r--    1 kaysawada  staff  1084976 Oct 12 15:32 package-3a6c16f5-v59.tar.gz
+```
+
+In this example, `package-3a6c16f5-v59.tar.gz` can be uploaded via either Fastly App (Admin console of Web UI) or Fastly CLI (using `$fastly compute deploy` command).
 
 [1] If you don't have `jq` command available on your system, you can always manually generate PACKAGE_NAME env variable by the command below and use it in the aforementioned command(Make sure you use your own fiddle url for curl command);
 ```
