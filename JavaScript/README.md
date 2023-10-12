@@ -9,7 +9,7 @@ root@a3c6d940901d:/app# fastly compute build
 root@a3c6d940901d:/app# fastly compute publish --token=<INSERT-YOUR-APIKEY>
 ```
 
-## Pro Tips for debugging
+## Tips for debugging
 
 ### How to show service version
 This will help you identify which version of services is running on production fleet.
