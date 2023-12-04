@@ -12,7 +12,7 @@ root@a3c6d940901d:/app# fastly compute publish --token=<INSERT-YOUR-APIKEY>
 ## Tips for debugging
 
 ### How to show service version
-This will help you identify which version of services is running on production fleet.
+This will help you identify which version of services is running on production fleet (Make sure you have added `import { env } from "fastly:env";` at the top of the script;
 ```javascript
   console.log("FASTLY_SERVICE_VERSION:", env('FASTLY_SERVICE_VERSION') || 'local');
 ```
